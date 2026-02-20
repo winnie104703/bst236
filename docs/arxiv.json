@@ -1,0 +1,22 @@
+{
+  "query": "machine learning",
+  "fetched_at": "2026-02-20T21:48:26Z",
+  "entries": [
+    {
+      "id": "https://arxiv.org/abs/1234.56789",
+      "title": "A Sample Machine Learning Paper",
+      "summary": "This is a short abstract for a sample paper used for local testing of the renderer.",
+      "updated": "2026-02-19T12:00:00Z",
+      "authors": ["Alice Example", "Bob Example"],
+      "pdf_url": "https://arxiv.org/pdf/1234.56789.pdf"
+    },
+    {
+      "id": "https://arxiv.org/abs/9876.54321",
+      "title": "Another ML Paper",
+      "summary": "Another sample abstract to validate multiple entries render correctly.",
+      "updated": "2026-02-18T09:30:00Z",
+      "authors": ["Carol Example"],
+      "pdf_url": "https://arxiv.org/pdf/9876.54321.pdf"
+    }
+  ]
+}
