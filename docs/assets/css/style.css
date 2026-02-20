@@ -1,4 +1,7 @@
 .root-replace-placeholder {}
+
+/* Hide any leftover debug overlay from development builds */
+#pacmanDebugPanel, .pacman-debug { display: none !important; }
 :root{
 	--bg:#ffffff;
 	--surface:#f7fbff;
