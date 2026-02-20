@@ -3,35 +3,69 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Valentine Pac-Man</title>
+  <title>Arcade Romance — Retro Pac‑Hearts</title>
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
   <header class="site-header">
     <div class="container">
-      <h1>Valentine Pac-Man</h1>
+      <h1>Arcade Romance — Retro Pac‑Hearts</h1>
       <nav class="main-nav">
         <a href="index.html">Home</a>
-        <a href="pacman.html">Pac-Man</a>
-        <a href="arxiv.html">arXiv Feed</a>
       </nav>
     </div>
   </header>
 
   <main class="container">
     <section>
-      <h2>Game (stub)</h2>
-      <p>This page will host the Valentine's-themed Pac-Man game. Game assets and code will be added here (`assets/js/pacman.js`).</p>
-      <p>Requirements: maze, ghosts, rose power-up that enables heart projectiles.</p>
+      <h2>Valentine Pac-Man</h2>
+      <div id="game-ui" style="position:relative; display:flex; gap:18px; align-items:flex-start;">
+        <div id="leftPane" style="position:relative;">
+          <canvas id="gameCanvas" width="576" height="576" aria-label="Pac-Man game canvas"></canvas>
+          <div id="startOverlay" style="position:absolute;left:0;top:0;width:576px;height:576px;display:flex;align-items:center;justify-content:center;flex-direction:column;background:linear-gradient(135deg, rgba(255,192,203,0.12), rgba(255,240,245,0.06));z-index:2;pointer-events:auto;">
+            <div style="background:rgba(0,0,0,0.5);color:#fff;padding:18px;border-radius:8px;text-align:center;">
+              <h2 style="margin:0 0 8px 0;">Valentine Pac-Man</h2>
+              <p style="margin:0 0 8px 0;">Click <strong>Start</strong> to begin. Use arrow keys or WASD to move.</p>
+              <p style="margin:0;font-size:12px;opacity:0.9;">Collect roses to shoot hearts and defeat ghosts.</p>
+            </div>
+          </div>
+        </div>
+        <aside id="controls" style="width:240px;">
+          <div id="hud" style="position:relative;z-index:3;display:flex;flex-direction:column;gap:12px;">
+            <div style="font-weight:600">Score: <span id="score">0</span></div>
+            <div>Lives: <span id="lives">3</span></div>
+            <div>Power: <span id="power">0</span>s</div>
+            <div id="controlButtons" style="display:flex;gap:8px;">
+              <button id="startBtn">Start</button>
+              <button id="pauseBtn">Pause</button>
+            </div>
+          </div>
+          <div id="sidePanel" style="margin-top:12px;padding:12px;border-radius:8px;background:rgba(7,16,51,0.03);">
+            <h3 style="margin:0 0 8px 0;">How to play</h3>
+            <p style="margin:0 0 8px 0;font-size:0.95rem;">
+              Step into a Valentine's maze of pockets and passages where Pac‑Man's appetite meets romance.
+              Guide Pac‑Man through the corridors to gobble pellets, avoid (or outwit) the chasing ghosts,
+              and keep an eye out for the rare <strong>Rose</strong> power‑up — our Valentine's special.
+            </p>
+            <p style="margin:0;font-size:0.92rem;color:var(--muted);">
+              When you collect a rose, the maze becomes charged with romance — but watch the bees.
+              The bees protect the roses and will chase you; collect a rose and Pac‑Man blooms with power, firing hearts
+              in his current direction to fend off the buzzing guardians. Use this Valentine surge to rack up points and clear the maze.
+            </p>
+          </div>
+        </aside>
+      </div>
+      
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="container">
-      <p>Return to <a href="index.html">home</a>.</p>
+      <p>&copy; Retro Pac‑Hearts Arcade</p>
     </div>
   </footer>
 
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/pacman.js"></script>
 </body>
 </html>

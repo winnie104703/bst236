@@ -1,19 +1,37 @@
+.root-replace-placeholder {}
 :root{
-  --bg:#fff;
-  --accent:#c0392b;
-  --muted:#666;
+	--bg:#ffffff;
+	--surface:#f7fbff;
+	--accent:#071033; /* dark blue text/accent */
+	--muted:#55677a;
 }
 *{box-sizing:border-box}
-body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;line-height:1.4;margin:0;background:var(--bg);color:#111}
+body{font-family:Baskerville, "Baskerville Old Face", Georgia, serif;line-height:1.4;margin:0;background:var(--bg);color:var(--accent)}
 .container{max-width:960px;margin:0 auto;padding:1rem}
-.site-header{background:linear-gradient(90deg,#ffe6eb, #fff);border-bottom:1px solid #eee}
-.site-header h1{margin:0;padding:1rem 0;font-size:1.4rem}
+.site-header{background:linear-gradient(180deg,#ffffff,var(--surface));border-bottom:1px solid rgba(7,16,51,0.06)}
+.site-header h1{margin:0;padding:1rem 0;font-size:1.6rem;color:var(--accent)}
 .main-nav{display:flex;gap:1rem}
 .main-nav a{color:var(--accent);text-decoration:none}
+.main-nav a:hover{color:#0b2a53}
 .hero{padding:1rem 0}
-.posts{padding:1rem 0;border-top:1px solid #f0f0f0}
-.site-footer{font-size:0.9rem;color:var(--muted);padding:1rem 0;border-top:1px solid #eee}
+.posts{padding:1rem 0;border-top:1px solid rgba(7,16,51,0.04)}
+.site-footer{font-size:0.9rem;color:var(--muted);padding:1rem 0;border-top:1px solid rgba(7,16,51,0.04)}
 
+/* Game UI styles */
+#game-ui{background:linear-gradient(180deg, #f9fbff, #f7fbff); padding:8px; border-radius:8px; display:flex; gap:12px}
+#gameCanvas{background:linear-gradient(180deg,#0b2247,#04112a); border-radius:6px; display:block}
+#hud{color:var(--accent); margin-top:8px; display:flex; gap:12px; align-items:center}
+#hud button{background:linear-gradient(180deg, #fff, #fff);border:2px solid var(--accent);color:var(--accent);padding:8px 12px;border-radius:8px;cursor:pointer;box-shadow:0 6px 18px rgba(7,16,51,0.06)}
+#hud button:hover{background:#f2f6fb}
+#controls{display:flex;flex-direction:column;gap:12px}
+#controlButtons{display:flex;gap:8px}
+#sidePanel{color:var(--muted)}
+#startOverlay div{box-shadow:0 6px 24px rgba(7,16,51,0.06)}
+
+/* Minimal responsive tweaks */
 @media (max-width:600px){
-  .main-nav{flex-direction:row;gap:0.6rem}
+	.main-nav{flex-direction:row;gap:0.6rem}
+	#gameCanvas{width:100%;height:auto}
 }
+
+.root-replace-placeholder {}
