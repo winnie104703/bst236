@@ -188,7 +188,6 @@
 
     function start(){
       // Start a fresh game: regenerate map, ensure connectivity, seed pellets and spawn ghosts
-      console.log('Pac-Man start() called');
       running = true;
       pac.score = 0; pac.lives = 3; pac.powered = 0;
       makeMap();
@@ -207,19 +206,7 @@
       requestAnimationFrame(loop);
     }
 
-    // create an on-page debug/status panel so users can see logs without DevTools
-    let _debugPanel = null;
-    function ensureDebugPanel(){
-      if(_debugPanel) return _debugPanel;
-      _debugPanel = document.createElement('div');
-      Object.assign(_debugPanel.style, {position:'fixed', right:'14px', top:'14px', zIndex:99999, background:'rgba(0,0,0,0.6)', color:'#fff', padding:'8px 10px', borderRadius:'6px', fontSize:'12px', maxWidth:'260px'});
-      _debugPanel.id = 'pacmanDebugPanel';
-      document.body.appendChild(_debugPanel);
-      return _debugPanel;
-    }
-    // global error handler: surface errors to page
-    window.addEventListener('error', function(e){ try{ const p = ensureDebugPanel(); p.textContent = 'Error: '+(e && e.message ? e.message : String(e)); }catch(_){} });
-    window.addEventListener('unhandledrejection', function(e){ try{ const p = ensureDebugPanel(); p.textContent = 'Promise Rejection: '+(e && e.reason ? (e.reason.message||String(e.reason)) : ''); }catch(_){} });
+    // debug panel removed for production
     function resume(){
       if(running) return;
       running = true;
@@ -357,9 +344,7 @@
     function updateHUD(){ if(scoreEl) scoreEl.textContent = pac.score; if(livesEl) livesEl.textContent = pac.lives; if(powerEl) powerEl.textContent = Math.ceil(pac.powered); }
 
     function render(){
-      // debug marker: small red dot to confirm rendering runs
-      try{ ctx.fillStyle='rgba(255,0,0,0.8)'; ctx.fillRect(2,2,6,6); }catch(e){ const p=ensureDebugPanel(); p.textContent = 'Render failed: '+e.message; }
-      try{ const p = ensureDebugPanel(); p.textContent = 'tick — pac:('+pac.r+','+pac.c+') ghosts:'+ghosts.length+' pellets:'+pellets.size; }catch(_){}
+      // (debug visuals removed for production)
       // background
       const bgGrad = ctx.createLinearGradient(0,0,0,canvas.height);
       bgGrad.addColorStop(0,'#071733'); bgGrad.addColorStop(1,'#031022');
