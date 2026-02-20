@@ -1,22 +1,82 @@
 {
   "query": "machine learning",
-  "fetched_at": "2026-02-20T21:48:26Z",
+  "fetched_at": "2026-02-20T22:19:48Z",
   "entries": [
     {
-      "id": "https://arxiv.org/abs/1234.56789",
-      "title": "A Sample Machine Learning Paper",
-      "summary": "This is a short abstract for a sample paper used for local testing of the renderer.",
-      "updated": "2026-02-19T12:00:00Z",
-      "authors": ["Alice Example", "Bob Example"],
-      "pdf_url": "https://arxiv.org/pdf/1234.56789.pdf"
+      "id": "http://arxiv.org/abs/2602.17665v1",
+      "title": "OpenEarthAgent: A Unified Framework for Tool-Augmented Geospatial Agents",
+      "summary": "Recent progress in multimodal reasoning has enabled agents that can interpret imagery, connect it with language, and perform structured analytical tasks. Extending such capabilities to the remote sensing domain remains challenging, as models must reason over spatial scale, geographic structures, and multispectral indices while maintaining coherent multi-step logic. To bridge this gap, OpenEarthAgent introduces a unified framework for developing tool-augmented geospatial agents trained on satellite imagery, natural-language queries, and detailed reasoning traces. The training pipeline relies on supervised fine-tuning over structured reasoning trajectories, aligning the model with verified multistep tool interactions across diverse analytical contexts. The accompanying corpus comprises 14,538 training and 1,169 evaluation instances, with more than 100K reasoning steps in the training split and over 7K reasoning steps in the evaluation split. It spans urban, environmental, disaster, and infrastructure domains, and incorporates GIS-based operations alongside index analyses such as NDVI, NBR, and NDBI. Grounded in explicit reasoning traces, the learned agent demonstrates structured reasoning, stable spatial understanding, and interpretable behaviour through tool-driven geospatial interactions across diverse conditions. We report consistent improvements over a strong baseline and competitive performance relative to recent open and closed-source models.",
+      "updated": "2026-02-19T18:59:54Z",
+      "authors": [
+        "Akashah Shabbir",
+        "Muhammad Umer Sheikh",
+        "Muhammad Akhtar Munir",
+        "Hiyam Debary",
+        "Mustansar Fiaz",
+        "Muhammad Zaigham Zaheer",
+        "Paolo Fraccaro",
+        "Fahad Shahbaz Khan",
+        "Muhammad Haris Khan",
+        "Xiao Xiang Zhu",
+        "Salman Khan"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2602.17665v1"
     },
     {
-      "id": "https://arxiv.org/abs/9876.54321",
-      "title": "Another ML Paper",
-      "summary": "Another sample abstract to validate multiple entries render correctly.",
-      "updated": "2026-02-18T09:30:00Z",
-      "authors": ["Carol Example"],
-      "pdf_url": "https://arxiv.org/pdf/9876.54321.pdf"
+      "id": "http://arxiv.org/abs/2602.17664v1",
+      "title": "Sink-Aware Pruning for Diffusion Language Models",
+      "summary": "Diffusion Language Models (DLMs) incur high inference cost due to iterative denoising, motivating efficient pruning. Existing pruning heuristics largely inherited from autoregressive (AR) LLMs, typically preserve attention sink tokens because AR sinks serve as stable global anchors. We show that this assumption does not hold for DLMs: the attention-sink position exhibits substantially higher variance over the full generation trajectory (measured by how the dominant sink locations shift across timesteps), indicating that sinks are often transient and less structurally essential than in AR models. Based on this observation, we propose ${\\bf \\texttt{Sink-Aware Pruning}}$, which automatically identifies and prunes unstable sinks in DLMs (prior studies usually keep sinks for AR LLMs). Without retraining, our method achieves a better quality-efficiency trade-off and outperforms strong prior pruning baselines under matched compute. Our code is available at https://github.com/VILA-Lab/Sink-Aware-Pruning.",
+      "updated": "2026-02-19T18:59:50Z",
+      "authors": [
+        "Aidar Myrzakhan",
+        "Tianyi Li",
+        "Bowei Guo",
+        "Shengkun Tang",
+        "Zhiqiang Shen"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2602.17664v1"
+    },
+    {
+      "id": "http://arxiv.org/abs/2602.17659v1",
+      "title": "When Vision Overrides Language: Evaluating and Mitigating Counterfactual Failures in VLAs",
+      "summary": "Vision-Language-Action models (VLAs) promise to ground language instructions in robot control, yet in practice often fail to faithfully follow language. When presented with instructions that lack strong scene-specific supervision, VLAs suffer from counterfactual failures: they act based on vision shortcuts induced by dataset biases, repeatedly executing well-learned behaviors and selecting objects frequently seen during training regardless of language intent. To systematically study it, we introduce LIBERO-CF, the first counterfactual benchmark for VLAs that evaluates language following capability by assigning alternative instructions under visually plausible LIBERO layouts. Our evaluation reveals that counterfactual failures are prevalent yet underexplored across state-of-the-art VLAs. We propose Counterfactual Action Guidance (CAG), a simple yet effective dual-branch inference scheme that explicitly regularizes language conditioning in VLAs. CAG combines a standard VLA policy with a language-unconditioned Vision-Action (VA) module, enabling counterfactual comparison during action selection. This design reduces reliance on visual shortcuts, improves robustness on under-observed tasks, and requires neither additional demonstrations nor modifications to existing architectures or pretrained models. Extensive experiments demonstrate its plug-and-play integration across diverse VLAs and consistent improvements. For example, on LIBERO-CF, CAG improves $π_{0.5}$ by 9.7% in language following accuracy and 3.6% in task success on under-observed tasks using a training-free strategy, with further gains of 15.5% and 8.5%, respectively, when paired with a VA model. In real-world evaluations, CAG reduces counterfactual failures of 9.4% and improves task success by 17.2% on average.",
+      "updated": "2026-02-19T18:59:20Z",
+      "authors": [
+        "Yu Fang",
+        "Yuchun Feng",
+        "Dong Jing",
+        "Jiaqi Liu",
+        "Yue Yang",
+        "Zhenyu Wei",
+        "Daniel Szafir",
+        "Mingyu Ding"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2602.17659v1"
+    },
+    {
+      "id": "http://arxiv.org/abs/2602.17658v1",
+      "title": "MARS: Margin-Aware Reward-Modeling with Self-Refinement",
+      "summary": "Reward modeling is a core component of modern alignment pipelines including RLHF and RLAIF, underpinning policy optimization methods including PPO and TRPO. However, training reliable reward models relies heavily on human-labeled preference data, which is costly and limited, motivating the use of data augmentation. Existing augmentation approaches typically operate at the representation or semantic level and remain agnostic to the reward model's estimation difficulty. In this paper, we propose MARS, an adaptive, margin-aware augmentation and sampling strategy that explicitly targets ambiguous and failure modes of the reward model. Our proposed framework, MARS, concentrates augmentation on low-margin (ambiguous) preference pairs where the reward model is most uncertain, and iteratively refines the training distribution via hard-sample augmentation. We provide theoretical guarantees showing that this strategy increases the average curvature of the loss function hence enhance information and improves conditioning, along with empirical results demonstrating consistent gains over uniform augmentation for robust reward modeling.",
+      "updated": "2026-02-19T18:59:03Z",
+      "authors": [
+        "Payel Bhattacharjee",
+        "Osvaldo Simeone",
+        "Ravi Tandon"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2602.17658v1"
+    },
+    {
+      "id": "http://arxiv.org/abs/2602.17655v1",
+      "title": "What Language is This? Ask Your Tokenizer",
+      "summary": "Language Identification (LID) is an important component of many multilingual natural language processing pipelines, where it facilitates corpus curation, training data analysis, and cross-lingual evaluation of large language models. Despite near-perfect performance on high-resource languages, existing systems remain brittle in low-resource and closely related language settings. We introduce UniLID, a simple and efficient LID method based on the UnigramLM tokenization algorithm, leveraging its probabilistic framing, parameter estimation technique and inference strategy. In short, we learn language-conditional unigram distributions over a shared tokenizer vocabulary but treat segmentation as a language-specific phenomenon. Our formulation is data- and compute-efficient, supports incremental addition of new languages without retraining existing models, and can naturally be integrated into existing language model tokenization pipelines. Empirical evaluations against widely used baselines, including fastText, GlotLID, and CLD3, show that UniLID achieves competitive performance on standard benchmarks, substantially improves sample efficiency in low-resource settings - surpassing 70% accuracy with as few as five labeled samples per language - and delivers large gains on fine-grained dialect identification.",
+      "updated": "2026-02-19T18:58:39Z",
+      "authors": [
+        "Clara Meister",
+        "Ahmetcan Yavuz",
+        "Pietro Lesci",
+        "Tiago Pimentel"
+      ],
+      "pdf_url": "https://arxiv.org/pdf/2602.17655v1"
     }
   ]
 }
