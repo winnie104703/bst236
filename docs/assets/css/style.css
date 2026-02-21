@@ -8,6 +8,8 @@
 	--accent:#071033; /* dark blue text/accent */
 	--muted:#55677a;
 }
+/* Use site accent for all links so they're dark blue */
+a{ color: var(--accent); }
 *{box-sizing:border-box}
 body{font-family:Baskerville, "Baskerville Old Face", Georgia, serif;line-height:1.4;margin:0;background:var(--bg);color:var(--accent)}
 .container{max-width:960px;margin:0 auto;padding:1rem}
