@@ -1,5 +1,7 @@
 # BST236 Assignment 1 — Case Study: Using Copilot CLI
 
+3 late days used
+
 This write-up documents how the repository's three deliverables were implemented and how GitHub Copilot CLI (agentic workflow) was used to produce them. This file is intended to be copied into a separate write-up repository for submission; it references the live demo hosted from this repo.
 
 Live demo
