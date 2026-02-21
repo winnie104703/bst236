@@ -1,109 +1,76 @@
-# Case Study: Building an Auto-updating arXiv Feed using Copilot CLI
+# BST236 Assignment 1 — Case Study: Using Copilot CLI
 
-This document is the write-up / tutorial that accompanies the code in this repository. It is written as a case-study showing how the GitHub Copilot CLI (agentic workflow) was used to implement the three homework problems and, specifically, to build Problem 3: an auto-updating arXiv feed (client-side renderer + scheduled GitHub Actions fetcher).
+This write-up documents how the repository's three deliverables were implemented and how GitHub Copilot CLI (agentic workflow) was used to produce them. This file is intended to be copied into a separate write-up repository for submission; it references the live demo hosted from this repo.
 
-Notes about distribution
-- This file was created inside the homework repo to be copied to a separate write-up repository for submission or presentation. If you copy this file to another repo, update the Live Site URL below and include any screenshots or video links in the placeholders.
-
-Live site (demo)
+Live demo
 - Site: https://winnie104703.github.io/bst236/
 - ArXiv feed page: https://winnie104703.github.io/bst236/arxiv.html
 
-Project summary
-- Goal: implement an agentic pipeline that (1) fetches recent arXiv papers matching keywords, (2) stores them as a static JSON artifact, (3) renders them client-side in docs/arxiv.html, and (4) updates the artifact nightly using GitHub Actions.
-- Rendering approach: client-side JS reads docs/arxiv.json produced by the fetch script. Rationale: easier CI commits, local testing, and small diffs.
+Brief introduction to the three problems
+- Problem 1 — Multi-page website: Create a minimal multi-page static site (homepage and project pages) hosted under docs/ and linked from the homepage.
+- Problem 2 — Valentine Pac-Man: A small interactive browser game page demonstrating client-side interactivity and assets.
+- Problem 3 — Auto-updating arXiv Feed: An agentic pipeline that fetches recent arXiv papers (machine learning), stores them as a static JSON artifact, renders them client-side, and updates the artifact nightly via GitHub Actions.
 
-Repository layout (key files)
-- docs/arxiv.html — client HTML page (renderer hooks into docs/arxiv.js)
-- docs/arxiv.js — client-side renderer that fetches and renders docs/arxiv.json
-- docs/arxiv.json — canonical data artifact (produced by scripts/fetch_arxiv.py)
-- scripts/fetch_arxiv.py — Fetch Agent: queries arXiv Atom API and writes JSON
-- .github/workflows/update-arxiv.yml — Workflow Agent: scheduled nightly job to run the fetch script and commit changes
-- SESSION_PLAN.md and HOMEWORK_WRITEUP.md — planning and write-up artifacts created during the session
+Summary of approach
+- Use Copilot CLI to plan and scaffold small, focused agents (Fetcher, Renderer, Workflow) and to generate runnable drafts for scripts, client JS, CSS tweaks, and workflow YAML.
+- Prefer client-side rendering for Problem 3: the fetch script writes docs/arxiv.json and docs/arxiv.html loads it via docs/arxiv.js. This keeps CI commits small and simplifies local testing.
 
-Tools and services used
-- Git + GitHub — version control and hosting
-- GitHub Pages — static site hosting for the demo
-- GitHub Actions — scheduled runner for nightly updates
-- GitHub Copilot CLI — interactive agent for planning, prompting, and code generation
-- Python 3 (standard library only) — fetch/parsing script (no external dependencies)
-- Browser DevTools — inspect renderer and network interactions
+Problem 1 — Multi-page website
+- Goal: Provide a clean homepage linking to project pages (index, pacman, arXiv feed).
+- Implementation highlights:
+  - Files: docs/index.html, docs/assets/css/style.css, docs/pacman.html (project page stub).
+  - Copilot usage: prompts asked Copilot CLI to scaffold semantic HTML structure and a minimal, responsive CSS theme. Example prompt: "Create a minimal homepage with a header, nav, and a brief bio section."
+  - What worked: Rapid scaffolding and small iterative styling edits.
+  - Notes: Navigation simplified per reviewer feedback to keep the header focused.
 
-Agent roles and orchestration
-- Planner / Reviewer (human + Copilot CLI): design, approve plans, review PRs, and iterate on UX/requirements.
-- Fetch Agent (scripts/fetch_arxiv.py): talks to the arXiv Atom API, parses XML, and writes docs/arxiv.json.
-- Renderer Agent (docs/arxiv.js): client-side JavaScript that reads docs/arxiv.json and produces the user-facing list.
-- Workflow Agent (.github/workflows/update-arxiv.yml): runs nightly and commits docs/arxiv.json changes.
+Problem 2 — Valentine Pac-Man (interactive demo)
+- Goal: Deliver a small JS-based game page showing client-side interactivity.
+- Implementation highlights:
+  - Files: docs/pacman.html, docs/assets/js/pacman.js, supporting assets.
+  - Copilot usage: prompts asked for a simple game loop, basic keyboard controls, and asset placeholders. Example prompt: "Create a small Pac-Man style demo with a player, collectible, and basic scoring."
+  - What worked: Copilot generated workable scaffolding for the game loop and movement code; manual tweaks were required for asset placements and polish.
 
-How Copilot CLI was used (workflow)
-1. Plan: used Copilot CLI /plan mode to create a session plan listing all files and agent responsibilities.
-2. Implement: iteratively asked Copilot CLI to generate the fetch script, renderer JS, CSS changes, and workflow YAML. For each artifact the process was:
-   - Provide a short spec (one or two sentences) describing the desired behavior.
-   - Ask Copilot to produce a small, self-contained file (e.g., "Create scripts/fetch_arxiv.py that queries arXiv and writes docs/arxiv.json").
-   - Run the generated code locally, inspect output, and request targeted fixes if necessary.
-3. Test & iterate: run the fetch script locally, preview docs/arxiv.html via a local static server, and make small iterative styling/formatting edits.
-4. Publish: push feature branch, open PR (optionally), merge to main, and rely on GitHub Actions and Pages for hosting.
+Problem 3 — Auto-updating arXiv Feed (detailed)
+- Goal: Automate nightly updates of a curated machine learning feed from arXiv and render it on docs/arxiv.html.
+- Components produced:
+  - scripts/fetch_arxiv.py — Fetch Agent that queries arXiv Atom API and writes docs/arxiv.json (standard-library-only, CLI args: --keywords, --max, --output).
+  - docs/arxiv.js — Renderer Agent: client-side JS that fetches docs/arxiv.json and renders title, authors, human-friendly timestamp, truncated abstract, and PDF link.
+  - .github/workflows/update-arxiv.yml — Workflow Agent: GitHub Actions job that runs nightly (cron '0 0 * * *'), executes the fetch script, and commits/pushes docs/arxiv.json if changed.
 
-Representative prompts and notes (what worked and required iteration)
-- Prompt (fetch script):
-  "Create scripts/fetch_arxiv.py that queries the arXiv Atom API for a given keyword, parses entries into JSON with fields id,title,summary,authors,updated,pdf_url, and writes docs/arxiv.json. Use only the Python standard library."
-  - Result: Copilot produced a compact, standard-library-only script that required only minor fixes (XML namespace handling and pdf link fallback).
-  - Iteration: asked for better error codes (non-zero on fetch/parse errors) and CLI args (--keywords, --max, --output).
+- Why this design:
+  - Client-side rendering keeps diffs minimal (only data changes), simplifies local testing, and decouples rendering from CI.
+  - Using GitHub Actions as the scheduler provides a simple, auditable automation mechanism that commits artifacts back into the repo.
 
-- Prompt (renderer):
-  "Create docs/arxiv.js — a small client-side renderer that fetches arxiv.json and renders title (link), authors, updated timestamp and truncated abstract; add labels 'Author:' and 'Abstract:'."
-  - Result: Copilot produced a working renderer quickly; required a second prompt to format timestamps into a human-friendly timezone (EST).
+- Agent orchestration and roles
+  - Planner/Reviewer (human + Copilot CLI): define scope, approve changes, and guide iterations.
+  - Fetch Agent (scripts/fetch_arxiv.py): fetches and parses the Atom feed into JSON artifact.
+  - Renderer Agent (docs/arxiv.js): transforms JSON into DOM output on page load.
+  - Workflow Agent (.github/workflows/update-arxiv.yml): schedules runs and commits updates.
 
-- Prompt (workflow):
-  "Create .github/workflows/update-arxiv.yml that runs nightly (cron 0 0 * * *), checks out the repo, sets up Python, runs scripts/fetch_arxiv.py, and commits/pushes docs/arxiv.json if changed."
-  - Result: Good first draft generated; small edits added user.name/email and persist-credentials in actions/checkout.
+- Representative prompts and iterations (Problem 3)
+  - Fetch script prompt: "Create scripts/fetch_arxiv.py that queries arXiv API for a given keyword, parses Atom XML to extract id,title,summary,authors,updated,pdf_url, and writes docs/arxiv.json using only the Python standard library."
+    - Iteration: fixed XML namespace parsing, added pdf link fallback, added CLI args, and set non-zero exit codes on failure.
+  - Renderer prompt: "Create docs/arxiv.js that fetches arxiv.json and renders title (link), Author:, Abstract:, and a PDF link; truncate long abstracts." 
+    - Iteration: added human-friendly EST timestamp formatting and labels.
+  - Workflow prompt: "Create a GitHub Actions workflow to run nightly, set up Python, invoke scripts/fetch_arxiv.py, and commit changes only when docs/arxiv.json differs."
+    - Iteration: added git user.name/email and actions/checkout persist-credentials.
 
-What worked well
-- Copilot CLI provided quick, runnable drafts of scripts and glue code, speeding up the implementation loop.
-- The agentic pattern (small focused agents + planner) kept responsibilities clear and made testing incremental.
-- Standard-library-only Python made CI simple and dependency-free.
+Tools & services used
+- Git, GitHub, GitHub Pages, GitHub Actions
+- GitHub Copilot CLI (primary assistant for generating code and plans)
+- Python 3 (standard library)
+- Browser and DevTools for visual verification and debugging
 
-What required human iteration
-- XML namespaces and edge cases in arXiv Atom parsing required manual fixes and careful testing on live data.
-- Timestamp/timezone formatting and user-facing wording (labels, narrative tone) needed human editing for clarity and UX.
-- Git operations around publishing (gh-pages vs main/docs) required human decision and care to avoid overwriting important files.
+What worked well and limitations
+- Copilot CLI produced runnable first drafts quickly, enabling fast iterate-test cycles.
+- Human oversight was required for XML edge-cases, timestamp formatting, and user-facing text quality.
+- The fetch script could be hardened with retries, rate-limiting awareness, and better error reporting for production use.
 
-Repro steps (how to rebuild locally)
-1. Clone the repo and change into it:
-   git clone https://github.com/winnie104703/bst236.git
-   cd bst236
-2. (Optional) Run the fetch script locally to produce docs/arxiv.json:
-   python3 scripts/fetch_arxiv.py --keywords "machine learning" --max 15 --output docs/arxiv.json
-3. Preview the page locally:
-   cd docs && python3 -m http.server 8000
-   Open http://localhost:8000/arxiv.html
-4. To test the workflow manually, push changes to the repo and use Actions → workflow_dispatch to run the update job.
+Submission-ready cleanup
+- Removed placeholder references to screenshots or videos from earlier drafts.
+- This write-up focuses on describing the three problems and implementation decisions; visual artifacts can be added separately if required by the grader.
 
-Prompts history (summary)
-- Prompts were short, focused and iterative. Examples include:
-  - "Create a fetch script that queries arXiv and writes JSON (no external deps)."
-  - "Make the renderer show authors and truncated abstracts and label each field."
-  - "Format timestamps to EST and show date/time to minute precision."
-  - "Add a nightly GitHub Actions workflow to run the fetch script and commit changes."
+Contribution
+- Implementation and write-up: Yicheng He
 
-Placeholders for visual aids
-- Screenshot: docs/screenshots/site-preview.png (add screenshot here)
-- Video: docs/videos/session-demo.mp4 (link or embed if available)
-
-Limitations and future improvements
-- The fetch script does limited error handling and may need exponential backoff and retries for robust production use.
-- Consider adding caching, pagination, and better deduplication of arXiv versions.
-- If publishing to a protected branch or organization, adjust the workflow to use a PAT stored in Secrets rather than GITHUB_TOKEN.
-
-License & Contribution
-- Author / Contribution: Yicheng He (primary author and implementer)
-
-Acknowledgements
-- Implementation guided and scaffolded by GitHub Copilot CLI (interactive agent), with human planning and review.
-
-If you want, I can now:
-- Convert this into a README.md that overwrites the repo README,
-- Create a cleaned copy formatted for a separate write-up repo,
-- Or append exact prompt transcripts and Copilot responses to the session-state logs here.
-
-Co-authored-by: Copilot <223556219+Copilot@users.noreply.github.com>
+---
